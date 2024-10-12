@@ -1,0 +1,1 @@
+My first project for my c++  class a student information management system. You will be able to insert a student, search a student using many criterias and sort the list of students. The file is included in the project.
