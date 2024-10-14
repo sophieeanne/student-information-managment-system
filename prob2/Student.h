@@ -11,8 +11,8 @@ private:
     string tel;
 
 public:
- 
-    Student(std::string n, std::string id, std::string by, std::string dep, std::string t);
+    //constructor
+    Student(string n,string id, string by,string dep,string t);
 
     //getters
     string getName() const {

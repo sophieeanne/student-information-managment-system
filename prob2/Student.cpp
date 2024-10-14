@@ -1,6 +1,7 @@
 #include "Student.h"
 using namespace std;
 
+//constructor
 Student::Student(string n, string i, string by, string d, string t)
 {
 	name = n;

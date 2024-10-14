@@ -50,13 +50,26 @@ void sims::add_student_from_file(fstream& myfile)
 
 		cout << "Student ID (10 digits) ? ";
 		string student_ID;
+		bool found; 
+
 		do {
+			found = false;
 			cin >> student_ID;
-			if (student_ID.length() > 10 || student_ID =="")
+			if (student_ID.length() != 10 || student_ID =="")
 			{
 				cout << "Invalid input. Please try again ";
 			}
-		} while (student_ID.length() > 10 || student_ID == "");
+
+			//checking if a student already has the same student ID
+			for (Student s : student_list)
+			{
+				if (student_ID == s.getStudentID())
+				{
+					cout << "Error : already inserted. Please provide an other student ID\n";
+					found = true;
+				}
+			}
+		} while (student_ID.length() != 10 || student_ID == ""||found == true);
 
 		cout << "Birth year (4 digits) ? ";
 		string birth_year;
@@ -133,7 +146,7 @@ void sims::add_student_from_file(fstream& myfile)
 			for (Student s : student_list)
 			{
 				if (s.getName() == keyword) {
-					cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
+					cout << "\nName             Student ID       Dept                 Birth Year            Tel" << endl;
 					cout << s.getName() << "             ";
 					cout << s.getStudentID() << "         ";
 					cout << s.getDept() << "          ";
@@ -262,7 +275,10 @@ void sims::add_student_from_file(fstream& myfile)
 		}
 		case 6 :
 		{
-			cout << "\nListing all the students. Choose your sorting option";
+			cout << "\nListing all the students\n";
+			student_list.sort(sims::sort_by_name);
+			display_list();
+			cout << "\Choose a sorting option\n";
 			sorting_option(myfile);
 		}
 		default : 
@@ -272,6 +288,20 @@ void sims::add_student_from_file(fstream& myfile)
 		
 	}
 }
+
+//method to display the list of students
+void sims::display_list()
+{
+	cout << "\nName             Student ID       Dept                 Birth Year              Tel" << endl;
+	for (Student s : student_list)
+	{
+		cout << s.getName() << "           ";
+		cout << s.getStudentID() << "             ";
+		cout << s.getDept() << "               ";
+		cout << s.getBY() << "          ";
+		cout << s.getTel() << endl;
+	}
+}	
 
 //method to sort the student 
 void sims::sorting_option(fstream& myfile)
@@ -290,57 +320,25 @@ void sims::sorting_option(fstream& myfile)
 	case 1 : //sort by name
 	{
 		student_list.sort(sims::sort_by_name);
-		cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
-		for (Student s : student_list)
-		{
-			cout << s.getName() << "             ";
-			cout << s.getStudentID() << "         ";
-			cout << s.getDept() << "          ";
-			cout << s.getBY() << "         ";
-			cout << s.getTel() << endl;
-		}
+		display_list();
 		break;
 	}
 	case 2 : //sort by student id
 	{
 		student_list.sort(sims::sort_by_id);
-		cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
-		for (Student s : student_list)
-		{
-			cout << s.getName() << "             ";
-			cout << s.getStudentID() << "         ";
-			cout << s.getDept() << "          ";
-			cout << s.getBY() << "         ";
-			cout << s.getTel() << endl;
-		}
+		display_list();
 		break;
 	}
 	case 3 : //sort by birth year
 	{
 		student_list.sort(sims::sort_by_by);
-		cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
-		for (Student s : student_list)
-		{
-			cout << s.getName() << "             ";
-			cout << s.getStudentID() << "         ";
-			cout << s.getDept() << "          ";
-			cout << s.getBY() << "         ";
-			cout << s.getTel() << endl;
-		}
+		display_list();
 		break;
 	}
 	case 4 : //sort by department name
 	{
 		student_list.sort(sims::sort_by_deptname);
-		cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
-		for (Student s : student_list)
-		{
-			cout << s.getName() << "             ";
-			cout << s.getStudentID() << "         ";
-			cout << s.getDept() << "          ";
-			cout << s.getBY() << "         ";
-			cout << s.getTel() << endl;
-		}
+		display_list();
 		break;
 	}
 		default:

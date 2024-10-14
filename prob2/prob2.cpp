@@ -12,14 +12,18 @@
 using namespace std;
 int main() {
 
+    //initializing the file
     fstream myfile("file1.txt", ios::in | ios::out | ios::app);
     if (!myfile.is_open())
     {
         cout << "Error in opening the file" << endl;
         return 1;
     }
+
     sims s;  
-    s.add_student_from_file(myfile); //if the file already exists, this methode will add the students in the file in the list of students in the SIMS
+
+    //if the file already exists and is populated, this method will add the students in the file in the list of students in the SIMS
+    s.add_student_from_file(myfile); 
 
     cout << "Welcome to the Student Information Management System \n";
     int choice;
@@ -32,17 +36,17 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-        case 1: {
+        case 1: {//insertion
             cout << "\n";
             s.insert_student(myfile);  
             break;
         }
-        case 2: {
+        case 2: {//search
             cout << "\n";
             s.search_student(myfile);  
             break;
         }
-        case 3: {
+        case 3: {//sorting option
             cout << "\n";
             s.sorting_option(myfile);
             break;
