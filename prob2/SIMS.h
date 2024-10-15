@@ -17,7 +17,7 @@ class sims
 		static bool sort_by_id(const Student& a, const Student& b);
 		static bool sort_by_by(const Student& a, const Student& b); //by stands for birth year
 		static bool sort_by_deptname(const Student& a, const Student& b);
-		void sorting_option(fstream& myfile); //method to sort
+		void sorting_option(fstream& myfile); //method to sort the student
 		void display_list(); //method to display the list of students
 		
 };

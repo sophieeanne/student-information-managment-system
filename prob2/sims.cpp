@@ -30,7 +30,7 @@ void sims::add_student_from_file(fstream& myfile)
 		Student s(name, student_ID, birth_year, department, tel);
 		student_list.push_back(s);
 	}
-	cout << "DEBUG Number of students in list: " << student_list.size() << endl;
+	//cout << "Number of students in the file : " << student_list.size() << endl; //DEBUG LINE
 	myfile.clear();
 	myfile.seekp(0, ios::end);
 }
@@ -109,7 +109,7 @@ void sims::add_student_from_file(fstream& myfile)
 			<< birth_year << ";"
 			<< department << ";"
 			<< tel << endl;
-		cout << "\nStudent successfully added in the file";
+		cout << "\nStudent successfully added in the file\n";
 	
 	};
 
@@ -131,7 +131,7 @@ void sims::add_student_from_file(fstream& myfile)
 			cin >> choice;
 			if (choice == 0 || choice > 6)
 			{
-				cout << "Input error, please try again";
+				cout << "Input error, please try again\n";
 			}
 		} while (choice == 0 || choice > 6);
 		switch (choice)
@@ -197,18 +197,18 @@ void sims::add_student_from_file(fstream& myfile)
 			string keyword;
 			cin >> keyword;
 			bool found = false;
+			cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
 			for (Student s : student_list)
 			{
 				if (s.getStudentID().substr(0, 4) == keyword)
 				{
-					cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
 					cout << s.getName() << "             ";
 					cout << s.getStudentID() << "         ";
 					cout << s.getDept() << "          ";
 					cout << s.getBY() << "         ";
 					cout << s.getTel() << endl;
 					found = true;
-					break;
+					//break;
 				}
 			}
 			if (found == false)
@@ -225,18 +225,19 @@ void sims::add_student_from_file(fstream& myfile)
 			string keyword;
 			cin >> keyword;
 			bool found = false;
+			cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
 			for (Student s : student_list)
 			{
 				if (s.getBY() == keyword)
 				{
-					cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
+					
 					cout << s.getName() << "             ";
 					cout << s.getStudentID() << "         ";
 					cout << s.getDept() << "          ";
 					cout << s.getBY() << "         ";
 					cout << s.getTel() << endl;
 					found = true;
-					break;
+				
 				}
 			}
 			if (found == false)
@@ -249,27 +250,30 @@ void sims::add_student_from_file(fstream& myfile)
 		// search by department name
 		case 5:
 		{
-			cout << "Department name keyword ? ";
-			string keyword;
-			cin >> keyword;
+			//dynamic memory allocation, easier to handle spaces
+			char dept_name[1000];	
+			cout << "Department name keyword? ";
+			cin.ignore();
+			cin.getline(dept_name, 1000);
+			string keyword(dept_name); //converts the char array into a string
 			bool found = false;
+			cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
 			for (Student s : student_list)
 			{
-				if (s.getBY() == keyword)
+				if (s.getDept() == keyword)  
 				{
-					cout << "\nName             Student ID       Dept                 Birth Year      Tel" << endl;
+					found = true;
 					cout << s.getName() << "             ";
 					cout << s.getStudentID() << "         ";
 					cout << s.getDept() << "          ";
 					cout << s.getBY() << "         ";
 					cout << s.getTel() << endl;
-					found = true;
-					break;
+				
 				}
 			}
-			if (found == false)
+			if (!found)
 			{
-				cout << "\nstudent not found";
+				cout << "\nstudent not found" << endl;
 			}
 			break;
 		}
@@ -280,6 +284,7 @@ void sims::add_student_from_file(fstream& myfile)
 			display_list();
 			cout << "\Choose a sorting option\n";
 			sorting_option(myfile);
+			break;
 		}
 		default : 
 		{
@@ -313,7 +318,13 @@ void sims::sorting_option(fstream& myfile)
 		<< "\n4. Sort by Department"
 		<< "\n>";
 	int choice;
-	cin >> choice;
+	do {
+		cin >> choice;
+		if (choice == 0 || choice > 4)
+		{
+			cout << "Input error, please try again\n";
+		}
+	} while (choice == 0 || choice > 4);
 	switch (choice)
 	{
 		

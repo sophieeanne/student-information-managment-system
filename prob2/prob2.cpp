@@ -21,6 +21,7 @@ int main() {
     }
 
     sims s;  
+    
 
     //if the file already exists and is populated, this method will add the students in the file in the list of students in the SIMS
     s.add_student_from_file(myfile); 
@@ -56,7 +57,7 @@ int main() {
             break;
         }
         default: {
-            cout << "Invalid choice. Please try again." << endl;  
+            cout << "Invalid choice. Please try again.\n" << endl;  
             break;
         }
         }
